@@ -168,7 +168,10 @@ function slowPicsum() {
   }
 }
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  // 构建产物部署在 https://<user>.github.io/ProgressiveImage/ 这样的子路径下，
+  // 所以 base 必须带上仓库名，否则 dist 里的 /assets/* 会 404。开发服务器仍用根路径。
+  base: command === 'build' ? '/ProgressiveImage/' : '/',
   plugins: [vue(), slowPicsum()],
   server: {
     // 绑 0.0.0.0：同一局域网里的手机、另一台电脑都能打开。
@@ -180,4 +183,4 @@ export default defineConfig({
     host: true,
     port: 4173,
   },
-})
+}))

@@ -1,0 +1,38 @@
+[
+  {
+    "key": "banner",
+    "title": "头图",
+    "alt": "头图示例",
+    "width": 1200,
+    "height": 675,
+    "ratio": 1.7777777777777777,
+    "radius": 6,
+    "note": "1200×675，radius 6",
+    "url": "https://picsum.photos/id/1015/1200/675",
+    "thumbhash": "IZYJNIhelndPmHd8d5mPMugJgw=="
+  },
+  {
+    "key": "card",
+    "title": "商品图",
+    "alt": "商品图示例",
+    "width": 800,
+    "height": 600,
+    "ratio": 1.3333333333333333,
+    "radius": 6,
+    "note": "800×600，radius 6",
+    "url": "https://picsum.photos/id/1031/800/600",
+    "thumbhash": "3vcVDYB1h3dveHh2iGd4h2BGBQZx"
+  },
+  {
+    "key": "avatar",
+    "title": "头像",
+    "alt": "头像示例",
+    "width": 400,
+    "height": 400,
+    "ratio": 1,
+    "radius": 999,
+    "note": "400×400，radius 999",
+    "url": "https://picsum.photos/id/1032/400/400",
+    "thumbhash": "WUkKNwhQa4dSd2iJZriYl4iIB2i3gHcL"
+  }
+]

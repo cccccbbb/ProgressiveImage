@@ -29,8 +29,14 @@
 import { onMounted, ref } from 'vue'
 import { thumbHashToDataURL } from 'thumbhash'
 
-// 这一页没有任何图片元数据：清单和占位用的 thumbhash 都来自 /api/photos。
-// 那个接口是本工程的假后端，它按真实图片字节算出 thumbhash 再下发（见 vite.config.js）。
+// 这一页没有任何图片元数据：清单和占位用的 thumbhash 都来自接口，不是写死的。
+//   开发时      → /api/photos，vite 中间件实时向 picsum 求小图算哈希（见 vite.config.js）
+//   静态托管时  → public/api/photos.json，构建期由 scripts/gen-photos.mjs 预生成
+// 两者字段完全一致，所以这一页不需要知道自己跑在哪种环境里。
+const API_URL = import.meta.env.DEV
+  ? '/api/photos'
+  : `${import.meta.env.BASE_URL}api/photos.json`
+
 const DELAY = 2500
 const version = ref(0)
 const status = ref('loading')
@@ -50,7 +56,7 @@ async function loadPhotos() {
   status.value = 'loading'
   errorMessage.value = ''
   try {
-    const response = await fetch('/api/photos')
+    const response = await fetch(API_URL)
     if (!response.ok) {
       const detail = await response.text()
       throw new Error(`HTTP ${response.status}${detail ? ` · ${detail.slice(0, 120)}` : ''}`)

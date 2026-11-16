@@ -6,6 +6,8 @@
   "description": "Vue 3 渐进加载图片组件：模糊低清图 / 主色占位 / 骨架屏三种占位策略",
   "scripts": {
     "dev": "vite",
+    "gen:photos": "node scripts/gen-photos.mjs",
+    "prebuild": "npm run gen:photos",
     "build": "vite build",
     "preview": "vite preview"
   },

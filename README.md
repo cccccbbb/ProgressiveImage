@@ -18,6 +18,23 @@ npm run dev
 
 页面上有「重新加载一遍」按钮，点一次就能重看「模糊 → 清晰」。
 
+## 部署到 GitHub Pages
+
+线上地址：`https://cccccbbb.github.io/ProgressiveImage/`
+
+推到 `main` 分支就自动构建发布，工作流见 `.github/workflows/deploy.yml`（首次需要在仓库 Settings → Pages 里把 Source 选成 **GitHub Actions**）。
+
+静态托管上没有 Node 进程，所以前面架构图里的 ③ 假接口和 ④ 图片代理在构建期被换成静态资源：
+
+- `prebuild` 会跑 `scripts/gen-photos.mjs`：向 picsum 要 64px 小图 → 解码 → 算 thumbhash → 写入 `public/api/photos.json`
+- 页面据此 fetch `api/photos.json`（见 `UsagePage.vue` 顶部的 `API_URL`），开发时仍然走 vite 中间件
+- 图片地址直接指向 `picsum.photos`；`<img>` 跨域加载不需要 CORS，所以静态站点也能显示
+- 生成脚本有回退：某张图取不到就把该条 `thumbhash` 置 `null`（组件退化成纯色底），全部失败则保留已提交的 `photos.json`
+
+一处和本地开发的差异：`?delay=` 是 dev server 中间件的本事，静态站点上 picsum 会忽略这个参数，**「慢网」不再是人造的**，取决于访客的真实网络。
+
+> 改了仓库名的话，记得同步改 `vite.config.js` 里的 `base`，否则 `/assets/*` 会 404。
+
 ---
 
 ## 一、项目由四层组成
