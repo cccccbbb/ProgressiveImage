@@ -1,0 +1,21 @@
+{
+  "name": "progressive-image-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Vue 3 渐进加载图片组件：模糊低清图 / 主色占位 / 骨架屏三种占位策略",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "jpeg-js": "^0.4.4",
+    "thumbhash": "^0.1.1",
+    "vue": "^3.5.45"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.11",
+    "vite": "^8.3.8"
+  }
+}
